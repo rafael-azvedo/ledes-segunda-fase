@@ -16,19 +16,26 @@ const AlterarSenha = () => {
   };
 
   const handleAlterarSenha = () => {
+
+    if (!novaSenha.trim() || !confirmarSenha.trim()) {
+      alert('Por favor, preencha ambos os campos de senha.');
+      return;
+    }
+
     if (novaSenha !== confirmarSenha) {
       alert('As senhas não coincidem. Por favor, verifique.');
       return;
     }
+    
     console.log('Senha alterada com sucesso!');
     navigateTo('/');
   };
 
   return (
     <div className='body-alterar-senha'>
-      <h1 className='titulo-alterar-senha'>Alterar Senha</h1>
+      <h1 className='titulo-alterar-senha'>Alteração de senha</h1>
       <form className='form-alterar-senha'>
-        <label htmlFor="novaSenha">Nova Senha</label>
+        <label htmlFor="novaSenha">Nova Senha:</label>
         <input
           type="password"
           id="novaSenha"
@@ -37,7 +44,7 @@ const AlterarSenha = () => {
           required
         />
 
-        <label htmlFor="confirmarSenha">Confirmar Senha</label>
+        <label htmlFor="confirmarSenha">Confirmar senha:</label>
         <input
           type="password"
           id="confirmarSenha"
@@ -46,8 +53,8 @@ const AlterarSenha = () => {
           required
         />
 
-        <button type="button" onClick={handleAlterarSenha}>
-          Alterar Senha
+        <button className="button-alterar-senha" type="button" onClick={handleAlterarSenha}>
+          Alterar
         </button>
       </form>
     </div>
