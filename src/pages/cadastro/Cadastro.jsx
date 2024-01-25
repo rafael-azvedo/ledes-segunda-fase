@@ -6,8 +6,35 @@ const Cadastro = () => {
   const navigateTo = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleCadastro = () => {
-    console.log('Cadastro realizado', selectedFile);
+  const handleCadastro = async () => {
+    const FirstName = document.querySelector('[placeholder="Digite seu nome"]').value;
+    const LastName = document.querySelector('[placeholder="Digite seu sobrenome"]').value;
+    const Role = document.querySelector('[placeholder="Digite seu cargo"]').value;
+    const Email = document.querySelector('[placeholder="Digite seu e-mail"]').value;
+    const Password = document.querySelector('[placeholder="Crie uma senha"]').value;
+
+    const formData = new FormData();
+    formData.append('first_name', FirstName);
+    formData.append('last_name', LastName);
+    formData.append('role', Role);
+    formData.append('email', Email);
+    formData.append('password', Password);
+    formData.append('foto', selectedFile);
+
+    try {
+      const response = await fetch('localhost:8000/api/v1/badge/', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log('Cadastro realizado com sucesso');
+      } else {
+        console.error('Erro ao cadastrar. Status:', response.status);
+      }
+    } catch (error) {
+      console.error('Erro ao enviar requisição:', error);
+    }
   };
 
   const goToLoginPage = () => {
