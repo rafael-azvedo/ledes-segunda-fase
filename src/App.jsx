@@ -12,10 +12,6 @@ function App() {
     navigateTo('/cadastro');
   };
 
-  const goToAlterarSenhaPage = () => {
-    navigateTo('/alterarSenha');
-  };
-
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -49,7 +45,7 @@ function App() {
 
       <div className="signup-container-login">
         
-        <h1 className='signup-title-login'>Login</h1>
+        <h1 className='signup-title-login'>Entrar</h1>
         
         <form className='form-login' onSubmit={handleLoginFormSubmit}>
           <p className='legenda-form-login'>E-mail</p>
