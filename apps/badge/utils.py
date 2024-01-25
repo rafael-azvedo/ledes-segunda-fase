@@ -69,8 +69,6 @@ def approve_badge_update_request(id, user):
     update_request = BadgeUpdateRequest.objects.get(pk=id)
     badge          = Badge.objects.get(pk=update_request.badge.id)
 
-    print(badge)
-    print(badge.user.first_name)
 
     if update_request.field in vars(badge).keys():
         setattr(badge, update_request.field, update_request.new_value)
@@ -79,8 +77,6 @@ def approve_badge_update_request(id, user):
         setattr(badge.user, update_request.field, update_request.new_value)
         badge.user.save()
     
-    print(badge)
-    print(badge.user.first_name)
 
     update_request.authorized    = True
     update_request.authorized_at = timezone.now()
