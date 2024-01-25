@@ -1,0 +1,57 @@
+body{
+    margin: 0;  
+}
+
+.body-alterar-senha {
+    background: linear-gradient(rgba(127, 193, 241, 0.9979), rgba(0, 38, 171, 1));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;  
+    margin: 0; 
+}
+  
+.form-alterar-senha {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+  
+.button-alterar-senha {
+    align-self: center;
+    background-color: rgb(52,152,219);
+    padding: .8rem;              
+    color: #fff;                
+    border: none;               
+    border-radius: 8px;         
+    cursor: pointer;             
+    transition: background-color 0.2s ease-in; 
+    width: 10rem;
+    margin-top: 3rem;
+    background: linear-gradient(rgba(127, 193, 241, 0.9979), rgb(52, 152, 219));
+    box-shadow: 0px 0px 10px rgb(0, 23, 107);
+
+
+}
+
+.titulo-alterar-senha{
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-alterar-senha label{
+    color: #fff;
+    margin-top: 1.5rem;
+    margin-bottom: .3rem;
+}
+
+.form-alterar-senha input{
+    width: 18.75rem;
+    height: 2rem;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0px 0px 10px rgb(0, 23, 107);
+
+}
+
