@@ -7,7 +7,7 @@ from django.utils import timezone
 
 
 def logout_user(user):
-    print(request.user.auth_token.delete())
+    print(user.auth_token.delete())
 
 def create_badge(data):
     user = User.objects.create_user(
@@ -47,7 +47,7 @@ def decline_badge_update_request(id):
 
 def approve_badge_update_request(id, user):
     update_request = BadgeUpdateRequest.objects.get(pk=id)
-    badge          = Badge.objects.get(pk=id)
+    badge          = Badge.objects.get(pk=update_request.badge.id)
 
     print(badge)
     print(badge.user.first_name)
