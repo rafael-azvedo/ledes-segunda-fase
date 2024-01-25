@@ -1,7 +1,6 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import App from '../App';
-import Login from "./login/Login";
 import Cadastro from "./cadastro/Cadastro";
 import Cracha from "./cracha/Cracha";
 import Administrador from "./administrador/Administrador";
@@ -13,7 +12,6 @@ const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<App />} />
-            <Route path="/login" element={<Login/>}/>
             <Route path="/cadastro" element={<Cadastro/>}/>
             <Route path="/cracha" element={<Cracha/>}/>
             <Route path="/administrador" element={<Administrador/>}/>

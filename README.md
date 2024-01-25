@@ -12,7 +12,7 @@ python3 -m venv .venv
 ```
 Ative o ambiente virtual.
 ```bash
-source .venv/bin/activate.
+source .venv/bin/activate
 ```
 Instale as dependências .
 ```bash

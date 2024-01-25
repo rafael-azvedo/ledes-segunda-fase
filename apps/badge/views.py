@@ -14,7 +14,7 @@ def index(request):
 
 @api_view(["POST"])
 def register(request):    
-    badge = utils.create_badge(request.data)
+    badge = utils.create_badge(request.data, request.FILES.get('image'))
     return Response({"token": badge.user.auth_token.key}, status=201)
 
 @api_view(["DELETE"])
