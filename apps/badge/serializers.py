@@ -8,7 +8,7 @@ class BadgeSerializer(serializers.ModelSerializer):
     email      = serializers.ReadOnlyField(source='user.email')
     class Meta:
         model = Badge
-        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'role']
+        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'role', 'image_path']
 
 class BadgeUpdateRequestSerializer(serializers.ModelSerializer):
     badge_id   = serializers.ReadOnlyField(source='badge.id')

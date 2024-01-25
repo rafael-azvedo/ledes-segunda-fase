@@ -3,13 +3,28 @@ from rest_framework.authtoken.models import Token
 from .models import Badge, BadgeUpdateRequest
 from .serializers import BadgeSerializer, BadgeUpdateRequestSerializer
 from django.utils import timezone
+from os import path
+from core.settings import STATIC_URL
+from uuid import uuid4
 
 
 
 def logout_user(user):
-    print(request.user.auth_token.delete())
+    print(user.auth_token.delete())
 
-def create_badge(data):
+def normalize_file_name(file_name):
+    name, extention = file_name.split('.')
+    return f'{uuid4()}.{extention}'
+
+def save_image_file(file):
+    image_path = path.join(STATIC_URL, normalize_file_name(file.__str__()))
+
+    with open(image_path, 'wb') as image_file:
+        image_file.write(file.file.read())
+
+    return image_path    
+
+def create_badge(data, file=None):
     user = User.objects.create_user(
         username   = data['username'],
         password   = data['password'],
@@ -17,13 +32,18 @@ def create_badge(data):
         last_name  = data['last_name'],
         email      = data['email']
     )
-
     token = Token.objects.create(user=user)
 
-    return Badge.objects.create(
+    badge = Badge.objects.create(
         user = user,
         role = data['role']
     )
+
+    if file:
+        badge.image_path = save_image_file(file)
+        badge.save()
+
+    return badge
 
 def get_badge_by_user(user):
     return BadgeSerializer(user.badge).data
@@ -47,7 +67,7 @@ def decline_badge_update_request(id):
 
 def approve_badge_update_request(id, user):
     update_request = BadgeUpdateRequest.objects.get(pk=id)
-    badge          = Badge.objects.get(pk=id)
+    badge          = Badge.objects.get(pk=update_request.badge.id)
 
     print(badge)
     print(badge.user.first_name)
