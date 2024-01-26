@@ -28,8 +28,8 @@ def logout(request):
 @authentication_classes([BearerAuthentication])
 @permission_classes([IsAuthenticated])
 def update(request):
-    response = utils.create_badge_update_request(request.data, request.user)
-    return Response({"message": "Alterações solicitadas"}, status=201)
+    message = utils.create_badge_update_request(request.data, request.user)
+    return Response({"message": message}, status=201)
 
 @api_view(["GET"])
 @authentication_classes([BearerAuthentication])

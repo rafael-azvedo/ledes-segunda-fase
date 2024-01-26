@@ -10,7 +10,7 @@ from uuid import uuid4
 
 
 def logout_user(user):
-    print(user.auth_token.delete())
+    user.auth_token.delete()
 
 def normalize_file_name(file_name):
     name, extention = file_name.split('.')
@@ -48,21 +48,30 @@ def create_badge(data, file=None):
 def get_badge_by_user(user):
     return BadgeSerializer(user.badge).data
 
-def create_badge_update_request(data, user):
-    for field, value in data.items():
-        BadgeUpdateRequest.objects.create(
-            badge     = user.badge,
-            field     = field,
-            old_value = getattr(user.badge, field) if field in vars(user.badge).keys() else getattr(user, field),
-            new_value = value
-        )
+def update_password(password, user):
+    update_request = BadgeUpdateRequest.objects.create(
+            badge         = user.badge,
+            field         = "password",
+            old_value     = user.password,
+            authorized    = True,
+            authorized_at = timezone.now()
+        ) 
 
-def get_badge_update_requests():
-    return BadgeUpdateRequestSerializer(BadgeUpdateRequest.objects.filter(authorized=False, active=True), many=True).data
+    user.set_password(password)
+    user.save()
+
+    update_request.new_value = user.password
+    update_request.save()
 
 def decline_badge_update_request(id):
     update_request        = BadgeUpdateRequest.objects.get(pk=id)
     update_request.active = False
+    update_request.save()
+
+def set_authorized_by(update_request, user):
+    update_request.authorized    = True
+    update_request.authorized_at = timezone.now()
+    update_request.authorized_by = user
     update_request.save()
 
 def approve_badge_update_request(id, user):
@@ -75,10 +84,35 @@ def approve_badge_update_request(id, user):
         badge.save()
     else:
         setattr(badge.user, update_request.field, update_request.new_value)
-        badge.user.save()
+        badge.user.save() 
     
+    set_authorized_by(update_request, user)
 
-    update_request.authorized    = True
-    update_request.authorized_at = timezone.now()
-    update_request.authorized_by = user
-    update_request.save()
+def create_badge_update_request(data, user):
+    for field, value in data.items():
+
+        if field == 'password':
+            update_password(value, user)
+
+            return "Senha atualizada"
+
+
+        update_request = BadgeUpdateRequest.objects.create(
+            badge     = user.badge,
+            field     = field,
+            old_value = getattr(user.badge, field) if field in vars(user.badge).keys() else getattr(user, field),
+            new_value = value
+        )
+
+        if user.is_staff:
+            approve_badge_update_request(update_request.id, user)
+        
+
+        return "Alterações realizadas" if user.is_staff else "Alterações solicitadas"
+
+def get_badge_update_requests():
+    return BadgeUpdateRequestSerializer(BadgeUpdateRequest.objects.filter(authorized=False, active=True), many=True).data
+
+
+
+    
