@@ -10,7 +10,7 @@ class Badge(models.Model):
     record_version = models.IntegerField(default=1, blank=True)
 
     class Meta:
-        db_table = "dadge"
+        db_table = "badge"
 
 class BadgeUpdateRequest(models.Model):
     badge         = models.ForeignKey(Badge, models.CASCADE)
