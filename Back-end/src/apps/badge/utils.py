@@ -17,12 +17,13 @@ def normalize_file_name(file_name):
     return f'{uuid4()}.{extention}'
 
 def save_image_file(file):
-    image_path = path.join(STATIC_URL, normalize_file_name(file.__str__()))
+    file_name = normalize_file_name(file.__str__())
+    image_path = path.join(STATIC_URL, file_name)
 
     with open(image_path, 'wb') as image_file:
         image_file.write(file.file.read())
 
-    return image_path    
+    return f'http://localhost:8000/static/{file_name}'    
 
 def create_badge(data, file=None):
     user = User.objects.create_user(

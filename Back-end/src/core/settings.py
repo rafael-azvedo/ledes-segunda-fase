@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-9)fv3v$c1o)508#u1zq@$05=b7*k4+&c%mmr0nfrh$mtr&#+qg
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '*']
 
 
 WSGI_APPLICATION = 'core.wsgi.application'
