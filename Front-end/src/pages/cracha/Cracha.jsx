@@ -3,8 +3,8 @@ import './Cracha.css';
 import ufmsLogo from './ufmsLogo.png';
 import { useNavigate } from 'react-router-dom';
 
-
 const Cracha = () => {
+    const navigateTo = useNavigate();
     const navigateTo = useNavigate();
     const [dadosUsuario, setDadosUsuario] = useState({});
     console.log(localStorage.getItem("token"))
@@ -14,10 +14,13 @@ const Cracha = () => {
             "Content-Type": "application/json",
             "Authorization" : localStorage.getItem("token")
         },
-
     }
 
     console.log(dadosUsuario.image_path)
+
+    const goToEditPage = () => {
+        navigateTo('/alterarCracha');
+    };
 
     useEffect(() => {
             fetch('http://127.0.0.1:8000//api/v1/badge/', requestOptions)
@@ -40,8 +43,7 @@ const Cracha = () => {
         
     }
 
-    return (
-            
+    return (   
         <div className="body-cracha">
             <div className="signup-cabecalho-cadastro">
                 <div className="signup-cabecalho-container-cabecalho">
@@ -58,6 +60,7 @@ const Cracha = () => {
                 </div>
                 <img src={ufmsLogo} className="logo" />
             </div>
+            <button onClick={goToEditPage} className="botaoAlterar">Editar crachá</button>
         </div>
     );
 };
