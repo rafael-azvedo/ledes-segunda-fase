@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Cracha = () => {
     const navigateTo = useNavigate();
-    const navigateTo = useNavigate();
     const [dadosUsuario, setDadosUsuario] = useState({});
     console.log(localStorage.getItem("token"))
     const requestOptions = {
