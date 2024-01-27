@@ -71,11 +71,22 @@ body{
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 10px;
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  box-sizing: border-box; 
+}
+.button-administrador {
+  background-color: rgb(52, 152, 219);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
   cursor: pointer;
   transition: background-color 0.2s ease-in;
   width: 100%; 
   box-sizing: border-box; 
+  margin-top: .1rem;
 }
 
 .signup-cabecalho {
@@ -101,7 +112,7 @@ body{
   margin: 1.5rem;
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
-  padding-top: 1rem;
+  padding-top: 2rem;
 }
 .form-login p{
   color: rgb(52,152,219);
@@ -114,7 +125,6 @@ body{
   color: rgb(52,152,219);
   margin-bottom: 1px;    
   font-family: 'Roboto', sans-serif; 
-  
 }
 
 .signup-container-login a {
