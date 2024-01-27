@@ -12,6 +12,10 @@ function App() {
     navigateTo('/cadastro');
   };
 
+  const goToAdmPage = () => {
+    navigateTo('/administrador');
+  };
+
   // const handleEmailChange = (e) => {
   //   setEmail(e.target.value);
   // };
@@ -83,6 +87,7 @@ function App() {
       <div className="signup-cabecalho">
         <div className="signup-cabecalho-container">
           <button onClick={goToRegisterPage} className="button-cadastro">Cadastro</button>
+          <button onClick={goToAdmPage} className="button-administrador">Sou administrador</button>
         </div>
       </div>
 
